@@ -3,63 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3allemly AI - منصة التعليم الذكي</title>
+    <title>منصة تعلملي الذكية - 3allemly AI</title>
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-        body { background-color: #0f172a; color: #f8fafc; font-size: 15px; }
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: #151c2c;
+            --accent-blue: #0284c7;
+            --accent-green: #10b981;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --border-color: #1e293b;
+        }
 
-        /* الهيدر وشريط التنقل */
-        header { background: #1e293b; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #334155; }
-        .logo-container { display: flex; align-items: center; gap: 12px; }
-        .logo-avatar { width: 45px; height: 45px; background: #0284c7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: white; }
-        .logo-container h1 { font-size: 22px; color: #38bdf8; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-size: 15px; min-height: 100vh; }
 
-        nav { display: flex; gap: 10px; }
-        nav button { background: transparent; border: 1px solid transparent; color: #94a3b8; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; transition: 0.3s; }
-        nav button.active, nav button:hover { background: #0284c7; color: #fff; border-color: #38bdf8; }
+        /* الهيدر والملاحة */
+        header { background: var(--card-bg); padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-badge { background: linear-gradient(135deg, #0284c7, #38bdf8); color: white; padding: 6px 14px; border-radius: 8px; font-weight: bold; font-size: 18px; }
+        .logo-title { font-size: 20px; font-weight: bold; color: #38bdf8; }
 
-        .container { max-width: 950px; margin: 30px auto; padding: 0 20px; }
+        nav { display: flex; gap: 8px; }
+        nav button { background: transparent; border: 1px solid transparent; color: var(--text-sub); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        nav button.active, nav button:hover { background: var(--accent-blue); color: white; }
 
-        /* الأقسام / الصفحات */
-        .page { display: none; }
-        .page.active { display: block; }
+        /* حاوية المحتوى */
+        .main-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
 
-        .card { background: #1e293b; padding: 25px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        h2 { color: #38bdf8; margin-bottom: 15px; font-size: 18px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        /* الكروت */
+        .card { background: var(--card-bg); padding: 25px; border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        .card-header { font-size: 18px; color: #38bdf8; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
 
-        label { display: block; margin-top: 14px; margin-bottom: 6px; color: #cbd5e1; font-weight: bold; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #fff; font-size: 15px; outline: none; }
-        input:focus, select:focus { border-color: #38bdf8; }
+        /* المدخلات */
+        .field-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-sub); }
+        input, select { width: 100%; padding: 12px 14px; background: #0b1120; border: 1px solid var(--border-color); border-radius: 8px; color: white; font-size: 14px; outline: none; }
+        input:focus, select:focus { border-color: var(--accent-blue); }
 
-        /* رفع الملفات */
-        .file-upload-box { border: 2px dashed #0284c7; border-radius: 10px; padding: 35px; text-align: center; background: #0f172a; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-        .file-upload-box:hover { background: #16243d; border-color: #38bdf8; }
+        /* منطقة رفع الملف */
+        .drop-zone { border: 2px dashed var(--accent-blue); border-radius: 12px; padding: 35px; text-align: center; background: #0b1120; cursor: pointer; transition: 0.3s; margin-top: 15px; }
+        .drop-zone:hover { background: #111a2e; }
 
         /* الأزرار */
-        .btn { display: inline-block; width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; text-align: center; transition: 0.3s; }
-        .btn:hover { background: #0369a1; }
-        .btn-success { background: #16a34a; }
-        .btn-success:hover { background: #15803d; }
-        .btn-whatsapp { background: #25d366; color: #fff; width: 49%; }
-        .btn-whatsapp:hover { background: #1da851; }
+        .btn-action { display: block; width: 100%; padding: 13px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; text-align: center; }
+        .btn-action:hover { opacity: 0.9; }
+        .btn-green { background: var(--accent-green); }
+        .btn-whatsapp { background: #25d366; color: white; flex: 1; }
 
-        /* شاشة التصحيح */
-        .loader { display: none; margin: 25px 0; text-align: center; }
-        .spinner { width: 45px; height: 45px; border: 4px solid #334155; border-top: 4px solid #38bdf8; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* شاشة التحميل والنتائج */
+        .status-loader { display: none; text-align: center; margin: 20px 0; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border-color); border-top-color: var(--accent-blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .result-box { display: none; background: #0f172a; border: 1px solid #22c55e; border-radius: 10px; padding: 20px; margin-top: 20px; }
-        .report-actions { display: flex; justify-content: space-between; margin-top: 15px; }
+        .result-card { display: none; background: #0d2818; border: 1px solid var(--accent-green); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .flex-buttons { display: flex; gap: 10px; margin-top: 15px; }
 
-        /* جدول الدرجات */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 12px; text-align: center; border-bottom: 1px solid #334155; }
-        th { background: #0f172a; color: #38bdf8; }
-    </style>
-</head>
-<body>
-
-    <!-- الشريط العلوي والتنقل بين التبويبات -->
-    <header>
-        <div class="logo-container">
-            <div class="logo-avatar">3A</div>
+        /* الجداول */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: cen
